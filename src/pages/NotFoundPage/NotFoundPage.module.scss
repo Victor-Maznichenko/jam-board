@@ -1,0 +1,15 @@
+@import "@/assets/styles/mixins";
+
+.notFound {
+	height: 100dvh;
+	@include flex-center();
+}
+
+.img {
+	filter: drop-shadow(0px 0px 10px black);
+	pointer-events: none;
+	max-width: 100%;
+	max-height: 80dvh;
+	display: block;
+	margin-bottom: 1rem;
+}

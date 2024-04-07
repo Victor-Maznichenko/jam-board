@@ -1,0 +1,31 @@
+@import '@/assets/styles/mixins';
+
+.auth {
+  width: 100%;
+  min-height: 100dvh;
+  @include flex-center();
+  font-family: 'PTMono', 'Quicksand', sans-serif;
+}
+
+.inner {
+  padding: 2rem 1.5rem;
+  background-color: var(--background-content);
+  border-radius: 0.25rem;
+  max-width: 400px;
+  width: 100%;
+}
+
+.tabs :global(.tabs-top) {
+  margin-bottom: 25px;
+}
+
+.bottom {
+  @include flex-center();
+  margin-top: 30px;
+  column-gap: 2rem;
+
+  :global(.icon) {
+    fill: currentColor;
+    color: inherit;
+  }
+}

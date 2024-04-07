@@ -1,0 +1,19 @@
+.input + .input {
+	margin-top: 10px;
+}
+
+.login {
+	text-align: center;
+}
+
+.button {
+	margin-top: 15px;
+}
+
+.errorMessage {
+  color: var(--error-text-color);
+  font-size: 0.875rem;
+  &:empty {
+    display: none;
+  }
+}
