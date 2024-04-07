@@ -1,0 +1,27 @@
+.links {
+	display: flex;
+	align-items: center;
+}
+
+.link {
+	cursor: pointer;
+	padding: 5px 20px;
+	border: 1px solid black;
+	transition: all 0.3s;
+	&:global(.active) {
+		background-color: rgba(black, 0.3);
+	}
+	&:hover {
+		background-color: rgba(black, 0.1);
+	}
+}
+
+[data-theme="dark"] .link {
+	border: 1px solid white;
+	&:global(.active) {
+		background-color: rgba(white, 0.2);
+	}
+	&:hover {
+		background-color: rgba(white, 0.05);
+	}
+}

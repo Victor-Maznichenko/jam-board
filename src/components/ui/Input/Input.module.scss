@@ -1,0 +1,33 @@
+.input {
+	font-family: "PTMono", "Quicksand", sans-serif;
+	background-color: var(---background-ui);
+	color: var(--base-text-color);
+	border: 1px solid gray;
+	transition: all 0.3s;
+	border-radius: 4px;
+	padding: 8px 12px;
+	display: block;
+	outline: none;
+	width: 100%;
+
+	&::placeholder {
+		font-family: "PTMono", "Quicksand", sans-serif;
+	}
+
+	&:global(.error) {
+		border-color: var(--error-text-color);
+	}
+
+	&:disabled {
+		opacity: 0.7;
+		pointer-events: none;
+	}
+}
+
+.error {
+	color: var(--error-text-color);
+
+	&:empty {
+		display: none;
+	}
+}

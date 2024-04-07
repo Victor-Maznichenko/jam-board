@@ -1,0 +1,36 @@
+@import 'normalize';
+@import 'vars';
+@import 'mixins';
+@import 'fonts';
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: var(--background);
+  color: var(--base-text-color);
+  accent-color: white;
+}
+
+.app {
+  min-height: 100dvh;
+}
+
+button {
+  font-family: 'PTMono', 'Quicksand', sans-serif;
+  background-color: transparent;
+  cursor: pointer;
+  color: inherit;
+  border: none;
+  outline: none;
+}
+
+[data-theme='dark'] input:-internal-autofill-selected {
+  background-color: rgba(70, 90, 126, 0.4) !important;
+}
+
+@import 'media';
