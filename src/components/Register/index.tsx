@@ -2,7 +2,7 @@ import {useUnit} from 'effector-react';
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-import {$authError, clearAuthError, signUpFx} from '@/store/user';
+import {$errorAuth, signUpFx} from '@/store/auth';
 import {ROUTES} from '@/utils/constants';
 
 import Button from '@/components/ui/Button';
@@ -12,12 +12,11 @@ import styles from './Register.module.scss';
 
 const Register = ({className = ''}) => {
   const navigate = useNavigate();
-  const [signUpEffect, isLoading, errorMessage] = useUnit([signUpFx, signUpFx.pending, $authError]);
-
+  const [signUpEffect, isLoading, errorMessage] = useUnit([signUpFx, signUpFx.pending, $errorAuth]);
   const [values, setValues] = useState({
-    displayName: '',
     email: '',
     password: '',
+    displayName: '',
   });
 
   const handleChange = ({target: {value, name}}: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +25,6 @@ const Register = ({className = ''}) => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    clearAuthError();
     signUpEffect(values).then(() => navigate(ROUTES.DASHBOARDS));
   };
 

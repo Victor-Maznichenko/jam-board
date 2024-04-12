@@ -1,3 +1,5 @@
-export const setBodyTheme = (theme: string) => {
-  document.body.setAttribute('data-theme', theme);
-};
+export * from './setBodyTheme';
+export * from './buildUrl';
+export * from './cookies';
+export * from './saveCredentials';
+export * from './getRandomEmoji';

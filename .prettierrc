@@ -6,7 +6,7 @@
   "semi": true,
   "arrowParens": "always",
   "bracketSpacing": false,
-  "printWidth": 100,
+  "printWidth": 110,
   "endOfLine": "lf",
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrder": [

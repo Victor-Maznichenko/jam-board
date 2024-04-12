@@ -1,9 +1,8 @@
-// import { signUpFx } from "@/store/user";
 import {useUnit} from 'effector-react';
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-import {$authError, signInFx} from '@/store/user';
+import {$errorAuth, signInFx} from '@/store/auth';
 import {ROUTES} from '@/utils/constants';
 
 import Button from '@/components/ui/Button';
@@ -13,7 +12,8 @@ import styles from './Login.module.scss';
 
 const Login = ({className = ''}) => {
   const navigate = useNavigate();
-  const [signInEffect, isLoading, errorMessage] = useUnit([signInFx, signInFx.pending, $authError]);
+  const [signInEffect, isLoading, errorMessage] = useUnit([signInFx, signInFx.pending, $errorAuth]);
+
   const [values, setValues] = useState({
     email: '',
     password: '',

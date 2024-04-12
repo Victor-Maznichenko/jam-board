@@ -1,0 +1,23 @@
+@import '@/assets/styles/mixins';
+
+.userLink {
+  color: var(--base-text-color);
+  text-align: center;
+  @include flex-center();
+  flex-direction: column;
+}
+.emoji {
+  font-size: 25px;
+  height: 40px;
+  width: 40px;
+  overflow: hidden;
+  border: 1px solid var(--indigo-light);
+  border-radius: 50%;
+  @include flex-center();
+}
+.name {
+  white-space: nowrap;
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

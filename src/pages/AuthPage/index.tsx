@@ -1,12 +1,10 @@
-import {clearAuthError} from '@/store/user';
+import {errorAuthCleared} from '@/store/auth';
 
 import Login from '@/components/Login';
 import Register from '@/components/Register';
 import Tabs from '@/components/ui/Tabs';
 
 import styles from './AuthPage.module.scss';
-
-// import { useNavigate } from "react-router-dom";
 
 const tabsData = [
   {
@@ -22,7 +20,7 @@ const tabsData = [
 const AuthPage = () => (
   <main className={styles.auth}>
     <div className={styles.inner}>
-      <Tabs className={styles.tabs} onTabChange={clearAuthError} tabsData={tabsData} />
+      <Tabs className={styles.tabs} onTabChange={errorAuthCleared} tabsData={tabsData} />
     </div>
   </main>
 );

@@ -7,5 +7,11 @@ export const MESSAGING_SENDER_ID = import.meta.env.VITE_FIREBASE_MESSAGING_SENDE
 export const APP_ID = import.meta.env.VITE_FIREBASE_APP_ID;
 
 // Api URLS
-export const AUTH_URL = 'https://identitytoolkit.googleapis.com/v1';
-export const BASE_URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)`;
+export const AUTH_URL: string = import.meta.env.VITE_FIREBASE_AUTH_URL;
+export const BASE_URL: string = import.meta.env.VITE_FIREBASE_BASE_URL;
+export const TOKEN_URL: string = import.meta.env.VITE_FIREBASE_TOKEN_URL;
+
+export const TOKENS_NAMES = {
+  refresh: 'refreshToken',
+  access: 'accessToken',
+};
