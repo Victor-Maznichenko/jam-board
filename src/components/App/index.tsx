@@ -4,7 +4,6 @@ import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 import useLocalStorage from '@/hooks/useLocalStorage';
-import {updateCredentialsFx} from '@/store/auth';
 import {getUserFx} from '@/store/user';
 import {ROUTES} from '@/utils/constants';
 import {setBodyTheme} from '@/utils/helpers';
