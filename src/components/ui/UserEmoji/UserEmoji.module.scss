@@ -1,0 +1,9 @@
+@import '@/assets/styles/mixins';
+
+.emoji {
+  overflow: hidden;
+  border: 1px solid var(--indigo-light);
+  border-radius: 50%;
+  pointer-events: none;
+  @include flex-center();
+}

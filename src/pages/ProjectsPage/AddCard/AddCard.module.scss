@@ -1,0 +1,13 @@
+@import '@/assets/styles/mixins';
+
+.addCard {
+  width: 25rem;
+  height: 13rem;
+  border-radius: 1rem;
+  border: 1px solid var(--indigo-dark);
+  @include flex-center;
+}
+
+[data-theme='dark'] .addCard {
+  border: 1px solid var(--indigo-light);
+}

@@ -7,18 +7,9 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
-const Input = ({
-  className = '',
-  error = '',
-  placeholder = 'Введите текст...',
-  ...attrs
-}: InputProps) => (
+const Input = ({className = '', error = '', placeholder = 'Введите текст...', ...attrs}: InputProps) => (
   <div className={`${className} input-wrapper`}>
-    <input
-      className={`${styles.input} ${className} ${error && 'error'}`}
-      placeholder={placeholder}
-      {...attrs}
-    />
+    <input className={`${styles.input} ${error && 'error'}`} placeholder={placeholder} {...attrs} />
     <span className={styles.error}>{error}</span>
   </div>
 );

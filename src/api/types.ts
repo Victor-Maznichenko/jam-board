@@ -1,18 +1,14 @@
-export type FetchMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+import {UnknownObject} from '@/types';
 
-export enum UserRole {
-  PROGRAMMGER = 'PROGRAMMGER',
-  TEAM_LEAD = 'TEAM_LEAD',
-  VIEWER = 'VIEWER',
-  ADMIN = 'ADMIN',
-}
+import {UserRole} from './constants';
 
-export enum AuthError {
-  EMAIL_EXISTS = 'EMAIL_EXISTS',
-  INVALID_EMAIL = 'INVALID_EMAIL',
-  OPERATION_NOT_ALLOWED = 'OPERATION_NOT_ALLOWED',
-  INVALID_LOGIN_CREDENTIALS = 'INVALID_LOGIN_CREDENTIALS',
-  TOO_MANY_ATTEMPTS_TRY_LATER = 'TOO_MANY_ATTEMPTS_TRY_LATER',
+export type DocFields = Record<string, Record<string, unknown>>;
+
+export interface Document {
+  name: string;
+  createTime: string;
+  updateTime: string;
+  fields: DocFields;
 }
 
 export interface LoginData {
@@ -32,13 +28,11 @@ export type FirebaseError = {
   message: string;
 };
 
-export interface RequestParams {
-  path?: string;
-  baseURL?: string;
-  params?: Record<string, unknown>;
-  token?: string;
-  method?: FetchMethod;
-  body?: Record<string, unknown> | null;
+export enum RequestStatus {
+  Pending = 'pending',
+  Loading = 'loading',
+  Success = 'success',
+  Fail = 'fail',
 }
 
 export interface User {
@@ -48,8 +42,63 @@ export interface User {
   displayName: string;
 }
 
-export interface DocRequestParams {
+export interface UpdateRequestParams {
   path: string;
-  documentId: string;
-  body?: Record<string, unknown>;
+  body: Record<string, unknown>;
+}
+
+export interface CreateDocByIdParams {
+  path: string;
+  id: string;
+}
+
+export interface Project {
+  id: string;
+  title: string;
+  currentColor: string;
+  boards: Boards;
+}
+export interface Boards {
+  planned: Board;
+  inProgress: Board;
+  complete: Board;
+}
+
+export interface Board {
+  id: string;
+  title: string;
+  tasks: Task[];
+}
+
+export interface Task {
+  id: string;
+  title: string;
+  executor: User;
+  isFailed: boolean;
+  description?: string;
+  deadlineDate: string;
+}
+
+// НОВЫЕ ТИПЫ
+export interface BuildUrlParams {
+  baseURL?: string;
+  path?: string;
+  params?: UnknownObject;
+}
+
+export interface SimpleFetchParams extends Omit<BuildUrlParams, 'path'> {
+  options?: RequestInit;
+}
+
+export interface RequestParams extends BuildUrlParams {
+  method: FetchMethod;
+  body?: UnknownObject | null;
+}
+
+export enum FetchMethod {
+  Get = 'GET',
+  Put = 'PUT',
+  Post = 'POST',
+  Patch = 'PATCH',
+  Delete = 'DELETE',
 }

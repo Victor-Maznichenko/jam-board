@@ -2,7 +2,8 @@ import {useUnit} from 'effector-react';
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-import {$errorAuth, signUpFx} from '@/store/auth';
+import {RequestStatus} from '@/api/types';
+import $authState, {signUpFx} from '@/store/auth';
 import {ROUTES} from '@/utils/constants';
 
 import Button from '@/components/ui/Button';
@@ -12,7 +13,8 @@ import styles from './Register.module.scss';
 
 const Register = ({className = ''}) => {
   const navigate = useNavigate();
-  const [signUpEffect, isLoading, errorMessage] = useUnit([signUpFx, signUpFx.pending, $errorAuth]);
+  const {errorMessage, status} = useUnit($authState);
+  const isLoading = status === RequestStatus.Loading;
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -23,9 +25,10 @@ const Register = ({className = ''}) => {
     setValues({...values, [name]: value});
   };
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    signUpEffect(values).then(() => navigate(ROUTES.DASHBOARDS));
+    await signUpFx(values);
+    navigate(ROUTES.PROJECTS);
   };
 
   return (
@@ -36,6 +39,7 @@ const Register = ({className = ''}) => {
         value={values.displayName}
         name="displayName"
         placeholder="Псевдоним"
+        required
       />
       <Input
         className={styles.input}
@@ -44,6 +48,7 @@ const Register = ({className = ''}) => {
         type="email"
         name="email"
         placeholder="Почта"
+        required
       />
       <Input
         className={styles.input}
@@ -52,6 +57,7 @@ const Register = ({className = ''}) => {
         type="password"
         name="password"
         placeholder="Пароль"
+        required
       />
       <Button className={styles.button} type="submit" disabled={isLoading}>
         Зарегистрироваться

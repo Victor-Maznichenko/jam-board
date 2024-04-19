@@ -1,0 +1,28 @@
+.profile {
+  padding: 20px;
+  border-radius: 12px;
+  background-color: var(--background-content);
+  display: flex;
+}
+
+.img {
+  margin-right: 20px;
+}
+
+.title {
+  margin: 15px 0;
+}
+
+.role {
+  margin-bottom: 20px;
+}
+
+.email {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.emailInput {
+  margin: 0 8px;
+}

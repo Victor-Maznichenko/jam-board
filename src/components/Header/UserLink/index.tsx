@@ -1,21 +1,19 @@
 import {useUnit} from 'effector-react';
-import {useMemo} from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import {Link} from 'react-router-dom';
 
-import {$user} from '@/store/user';
-import {getRandomEmoji} from '@/utils/helpers';
+import $userState from '@/store/user';
+import {ROUTES} from '@/utils/constants';
 
 import styles from './UserLink.module.scss';
 
 const UserLink = () => {
-  const randomEmoji = useMemo(getRandomEmoji, []);
-  const user = useUnit($user);
+  const {user, userEmoji} = useUnit($userState);
 
   return (
-    <Link className={styles.userLink} to="/sdfsd">
-      <div className={styles.emoji}>{randomEmoji}</div>
+    <Link className={styles.userLink} to={ROUTES.PROFILE}>
+      <div className={styles.emoji}>{userEmoji}</div>
       <span className={styles.name}>{user?.displayName ?? <Skeleton />}</span>
     </Link>
   );

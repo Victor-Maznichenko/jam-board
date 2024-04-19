@@ -12,12 +12,12 @@ interface UseLocalStorageParams {
 }
 
 const useLocalStorage = ({key, value}: UseLocalStorageParams): UseLocalStorageReturn => {
-  const [itemValue, setItemValue] = useState(value ?? null);
+  const [itemValue, setItemValue] = useState(value ?? localStorage.getItem(key) ?? null);
 
   const setLocalStorageItem = useCallback(
     (value: string) => {
-      localStorage.setItem(key, value ?? '');
       setItemValue(value);
+      localStorage.setItem(key, value ?? '');
     },
     [key],
   );
@@ -28,27 +28,12 @@ const useLocalStorage = ({key, value}: UseLocalStorageParams): UseLocalStorageRe
   }, [key]);
 
   useEffect(() => {
-    if (value) {
-      setLocalStorageItem(value);
-    } else if (localStorage.getItem(key)) {
-      setLocalStorageItem(localStorage.getItem(key) ?? '');
-    } else {
-      setItemValue(null);
-    }
-  }, [key, setLocalStorageItem, value]);
-
-  useEffect(() => {
     const updateState = (event: StorageEvent) => {
-      if (key === event.key) {
-        setItemValue(event.newValue);
-      }
+      if (key === event.key) setItemValue(event.newValue);
     };
 
     window.addEventListener('storage', updateState);
-
-    return () => {
-      window.removeEventListener('storage', updateState);
-    };
+    return () => window.removeEventListener('storage', updateState);
   }, [key]);
 
   return [itemValue, setLocalStorageItem, removeLocalStorageItem];

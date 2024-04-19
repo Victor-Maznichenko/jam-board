@@ -8,3 +8,16 @@
   background-color: var(--background-content);
   padding: 10px 0;
 }
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.themeSwither {
+  margin-right: 2rem;
+}
+
+.addTask {
+  margin-right: 15px;
+}

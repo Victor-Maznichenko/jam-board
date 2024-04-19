@@ -1,6 +1,6 @@
-type DocFields = Record<string, Record<string, unknown>>;
+import {DocFields} from '@/api/types';
 
-export const convertFromDocFields = <T = Record<string, unknown>>(docFields: DocFields) => {
+export const convertFromFields = <T = Record<string, unknown>>(docFields: DocFields) => {
   const fieldsBody: Record<string, unknown> = {};
 
   for (const key in docFields) {

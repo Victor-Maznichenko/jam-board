@@ -6,6 +6,7 @@
   @include flex-center();
   flex-direction: column;
 }
+
 .emoji {
   font-size: 25px;
   height: 40px;
@@ -15,6 +16,7 @@
   border-radius: 50%;
   @include flex-center();
 }
+
 .name {
   white-space: nowrap;
   max-width: 250px;

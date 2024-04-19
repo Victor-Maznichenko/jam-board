@@ -1,19 +1,21 @@
 import Logo from '@/components/ui/Logo';
-import UserLink from '@/components/ui/UserLink';
+import ThemeSwitcher from '@/components/ui/ThemeSwitcher';
 
 import styles from './Header.module.scss';
+import UserLink from './UserLink';
 
-const Header = () => {
-  return (
-    <header className={styles.header}>
-      <div className="container">
-        <div className={styles.inner}>
-          <Logo />
+const Header = () => (
+  <header className={styles.header}>
+    <div className="container">
+      <div className={styles.inner}>
+        <Logo />
+        <div className={styles.actions}>
+          <ThemeSwitcher className={styles.themeSwither} />
           <UserLink />
         </div>
       </div>
-    </header>
-  );
-};
+    </div>
+  </header>
+);
 
 export default Header;

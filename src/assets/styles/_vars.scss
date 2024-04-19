@@ -6,6 +6,7 @@
 
   // Light theme styles
   --background: #edeef0;
+  --background-60: #edeef099;
   --background-content: #ffffff;
   --background-ui: #f0f2f5;
   --base-text-color: #141414;
@@ -15,6 +16,7 @@
 // Dark theme styles
 [data-theme='dark'] {
   --background: #141414;
+  --background-60: #14141499;
   --background-content: #222222;
   --base-text-color: #fff;
   --error-text-color: #e35a5a;

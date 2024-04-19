@@ -2,7 +2,8 @@ import {useUnit} from 'effector-react';
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-import {$errorAuth, signInFx} from '@/store/auth';
+import {RequestStatus} from '@/api/types';
+import $authState, {signInFx} from '@/store/auth';
 import {ROUTES} from '@/utils/constants';
 
 import Button from '@/components/ui/Button';
@@ -12,7 +13,8 @@ import styles from './Login.module.scss';
 
 const Login = ({className = ''}) => {
   const navigate = useNavigate();
-  const [signInEffect, isLoading, errorMessage] = useUnit([signInFx, signInFx.pending, $errorAuth]);
+  const {errorMessage, status} = useUnit($authState);
+  const isLoading = status === RequestStatus.Loading;
 
   const [values, setValues] = useState({
     email: '',
@@ -23,9 +25,10 @@ const Login = ({className = ''}) => {
     setValues({...values, [name]: value});
   };
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    signInEffect(values).then(() => navigate(ROUTES.DASHBOARDS));
+    await signInFx(values);
+    navigate(ROUTES.PROJECTS);
   };
 
   return (

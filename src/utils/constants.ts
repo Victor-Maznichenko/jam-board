@@ -1,5 +1,7 @@
-export const ROUTES = {
-  DASHBOARDS: '/',
-  AUTH: '/auth',
-  NOT_FOUND: '/404',
-};
+export enum ROUTES {
+  DASHBOARDS = '/:projectID',
+  PROJECTS = '/',
+  AUTH = '/auth',
+  NOT_FOUND = '*',
+  PROFILE = '/profile',
+}

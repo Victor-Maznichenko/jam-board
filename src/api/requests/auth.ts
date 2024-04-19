@@ -1,11 +1,10 @@
+import {TOKENS_NAMES} from '@/api/constants';
+import {LoginData, RegisterData} from '@/api/types';
+import {authFetch, tokenFetch} from '@/api/utils/fetches';
 import {deleteCookie} from '@/utils/helpers';
 
-import {API_KEY, TOKEN_URL, TOKENS_NAMES} from '../constants';
-import {authRequest, request} from '../request';
-import {LoginData, RegisterData} from '../types';
-
-export const signUpRequest = (registerData: RegisterData) =>
-  authRequest({
+export const signUp = async (registerData: RegisterData) =>
+  await authFetch.post({
     path: 'accounts:signUp',
     body: {
       ...registerData,
@@ -13,8 +12,8 @@ export const signUpRequest = (registerData: RegisterData) =>
     },
   });
 
-export const signInRequest = (loginData: LoginData) =>
-  authRequest({
+export const signIn = async (loginData: LoginData) =>
+  await authFetch.post({
     path: 'accounts:signInWithPassword',
     body: {
       ...loginData,
@@ -27,16 +26,11 @@ export const signOut = () => {
   deleteCookie(TOKENS_NAMES.access);
 };
 
-export const updateCredentials = () =>
-  request({
-    method: 'POST',
-    baseURL: TOKEN_URL,
+export const updateCredentials = async () =>
+  await tokenFetch.post({
     path: 'token',
-    params: {
-      key: API_KEY,
-    },
     body: {
-      grant_type: TOKENS_NAMES.refresh,
+      grant_type: 'refresh_token',
       refresh_token: localStorage.getItem(TOKENS_NAMES.refresh),
     },
   });

@@ -15,3 +15,39 @@ export const TOKENS_NAMES = {
   refresh: 'refreshToken',
   access: 'accessToken',
 };
+
+export enum UserRole {
+  VIEWER = 'Пользователь без прав',
+  PROGRAMMGER = 'Программист',
+  TEAM_LEAD = 'Тимлид',
+  ADMIN = 'Админ',
+}
+
+export const PermittedUserRoles = [UserRole.TEAM_LEAD, UserRole.ADMIN];
+
+export enum AuthError {
+  EMAIL_EXISTS = 'EMAIL_EXISTS',
+  INVALID_EMAIL = 'INVALID_EMAIL',
+  OPERATION_NOT_ALLOWED = 'OPERATION_NOT_ALLOWED',
+  INVALID_LOGIN_CREDENTIALS = 'INVALID_LOGIN_CREDENTIALS',
+  TOO_MANY_ATTEMPTS_TRY_LATER = 'TOO_MANY_ATTEMPTS_TRY_LATER',
+}
+
+export enum Colors {
+  SKY = '#0369a1',
+  RED = '#b91c1c',
+  BLUE = '#1d4ed8',
+  TEAL = '#0d9488',
+  LIME = '#65a30d',
+  BEIGE = '#fb923c',
+  INDIGO = '#4338ca',
+  ORANGE = '#c2410c',
+  EMERALD = '#059669',
+  FUCHSIA = '#701a75',
+  PINK_800 = '#9d174d',
+  PINK_950 = '#500724',
+  AMBER_500 = '#f59e0b',
+  AMBER_950 = '#451a03',
+  SLATE_700 = '#334155',
+  SLATE_900 = '#0f172a',
+}

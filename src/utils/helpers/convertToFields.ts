@@ -1,4 +1,4 @@
-export const convertToDocFields = <T = Record<string, unknown>>(body: T) => {
+export const convertToFields = <T = Record<string, unknown>>(body: T) => {
   const fieldsBody: Record<string, unknown> = {};
 
   for (const key in body) {
