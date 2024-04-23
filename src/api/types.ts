@@ -2,7 +2,7 @@ import {UnknownObject} from '@/types';
 
 import {UserRole} from './constants';
 
-export type DocFields = Record<string, Record<string, unknown>>;
+export type DocFields = UnknownObject<UnknownObject>;
 
 export interface Document {
   name: string;
@@ -56,27 +56,23 @@ export interface Project {
   id: string;
   title: string;
   currentColor: string;
-  boards: Boards;
-}
-export interface Boards {
-  planned: Board;
-  inProgress: Board;
-  complete: Board;
+  boards: Board[];
 }
 
 export interface Board {
   id: string;
   title: string;
-  tasks: Task[];
+  tasks?: Task[];
 }
 
 export interface Task {
   id: string;
   title: string;
-  executor: User;
-  isFailed: boolean;
-  description?: string;
-  deadlineDate: string;
+  authorName: string;
+  performerName?: string;
+  status: TaskStatus;
+  description: string;
+  deadlineDate?: string;
 }
 
 // НОВЫЕ ТИПЫ
@@ -101,4 +97,10 @@ export enum FetchMethod {
   Post = 'POST',
   Patch = 'PATCH',
   Delete = 'DELETE',
+}
+
+export enum TaskStatus {
+  Planned = '📅 Запланированно',
+  InProgress = '💼 В процессе',
+  Completed = '✅ Выполнено',
 }

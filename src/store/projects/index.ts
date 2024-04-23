@@ -66,6 +66,7 @@ $projectsState.on(getProjectsFx.doneData, reducers.getProjectsDone);
 $projectsState.on(deleteProjectFx.doneData, reducers.deleteProjectDone);
 $projectsState.on(updateProjectFx.doneData, reducers.updateProjectDone);
 
+// Exports
 export default $projectsState;
 export * from './actions';
 export * from './types';

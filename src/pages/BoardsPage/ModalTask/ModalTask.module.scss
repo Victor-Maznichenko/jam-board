@@ -1,0 +1,40 @@
+.authorName,
+.performerName {
+  &:empty {
+    display: none;
+  }
+  &::before {
+    font-weight: 600;
+  }
+  margin-bottom: 0.5rem;
+}
+
+.authorName::before {
+  content: 'Автор задачи: ';
+}
+
+.performerName::before {
+  content: 'Исполнитель задачи: ';
+}
+
+.title {
+  margin-bottom: 0.4rem;
+}
+
+.description {
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+}
+
+.deadlineText {
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: flex-start;
+  :global(.icon-clock) {
+    margin-right: 0.3rem;
+  }
+}
+
+.button {
+  margin-top: 2rem;
+}

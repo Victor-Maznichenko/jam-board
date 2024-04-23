@@ -1,5 +1,6 @@
 export * from './cookies';
 export * from './buildUrl';
+export * from './formatDate';
 export * from './setBodyTheme';
 export * from './getRandomEmoji';
 export * from './convertToFields';

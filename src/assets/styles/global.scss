@@ -72,4 +72,7 @@ li {
   list-style: none;
 }
 
-@import 'media';
+.hide {
+  opacity: 0;
+  pointer-events: none;
+}

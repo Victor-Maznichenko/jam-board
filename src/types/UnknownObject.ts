@@ -1,1 +1,1 @@
-export interface UnknownObject extends Record<string, unknown> {}
+export type UnknownObject<T = unknown> = Record<string, T>;

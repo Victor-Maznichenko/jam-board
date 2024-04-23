@@ -5,9 +5,9 @@ type ThemeContext = {
   toggleTheme: () => void;
 };
 
-const initialThemeContext: ThemeContext = {
+const initialContext: ThemeContext = {
   theme: null,
   toggleTheme: () => {},
 };
 
-export const ThemeContext = createContext(initialThemeContext);
+export const ThemeContext = createContext(initialContext);

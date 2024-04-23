@@ -55,6 +55,9 @@
    VITE_FIREBASE_STOGRAGE_BUCKET=jamboard-13be8.appspot.com
    VITE_FIREBASE_MESSAGING_SENDER_ID=558631511766
    VITE_FIREBASE_APP_ID=1:558631511766:web:53c85d66d1bf0c4283cb77
+   VITE_FIREBASE_TOKEN_URL=https://securetoken.googleapis.com/v1/
+   VITE_FIREBASE_AUTH_URL=https://identitytoolkit.googleapis.com/v1/
+   VITE_FIREBASE_BASE_URL=https://firestore.googleapis.com/v1/projects/jamboard-13be8/databases/(default)/
    ```
 
 ### Компиляция и горячая загрузка для разработки

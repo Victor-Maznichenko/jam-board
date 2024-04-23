@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 import {FirebaseError} from '@/api/types';
-import {getUserFx} from '@/store/user';
+import {getProfileFx} from '@/store/user';
 import {ROUTES} from '@/utils/constants';
 
 import AppRoutes from './AppRoutes';
@@ -14,7 +14,7 @@ const App = () => {
   useEffect(() => {
     const checkForAuth = async () => {
       try {
-        await getUserFx();
+        await getProfileFx();
       } catch (error) {
         const firebaseError = error as FirebaseError;
         if (firebaseError.code !== 401) navigate(ROUTES.AUTH);

@@ -1,27 +1,27 @@
 import {createEffect, createEvent} from 'effector';
 
-import {getEntity} from '@/api/requests/firebase';
 import {User} from '@/api/types';
-import {convertToFields} from '@/utils/helpers';
 
-import {updateEntityFx} from '../firebase';
+import {getEntityFx, updateEntityFx} from '../firebase';
 
 // Effects
-export const getUserFx = createEffect(async () => {
-  const id = localStorage.getItem('uid');
-  if (!id) throw new Error('Unknown uid');
-  return await getEntity({path: `/users/${id}`});
+export const getUserFx = createEffect(async (uid: string) => {
+  return await getEntityFx({path: `/users/${uid}`});
 });
 
-export const updateUserFx = createEffect(
-  async (user: User) =>
-    await updateEntityFx({
-      path: `/users/${user.uid}`,
-      body: {
-        fields: convertToFields<User>(user),
-      },
-    }),
-);
+export const getProfileFx = createEffect(async () => {
+  const uid = localStorage.getItem('uid');
+  if (!uid) throw new Error('Unknown uid');
+  return await getUserFx(uid);
+});
+
+export const updateUserFx = createEffect(async (newUser: User) => {
+  await updateEntityFx({
+    path: `/users/${newUser.uid}`,
+    body: {...newUser},
+  });
+  return newUser;
+});
 
 // Events
 export const updateUserEmoji = createEvent();

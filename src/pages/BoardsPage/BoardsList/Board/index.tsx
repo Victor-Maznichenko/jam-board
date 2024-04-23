@@ -1,6 +1,6 @@
 import type {Board} from '@/api/types';
 
-import TasksList from '../TasksList';
+import TasksList from '../../TasksList';
 import styles from './Board.module.scss';
 
 interface BoardProps {

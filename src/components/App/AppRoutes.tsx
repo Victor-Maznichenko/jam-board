@@ -3,7 +3,7 @@ import {Route, Routes} from 'react-router-dom';
 import {ROUTES} from '@/utils/constants';
 
 import AuthPage from '@/pages/AuthPage';
-// import BoardsPage from '@/pages/BoardsPage';
+import BoardsPage from '@/pages/BoardsPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import ProfilePage from '@/pages/ProfilePage';
 import ProjectsPage from '@/pages/ProjectsPage';
@@ -15,7 +15,7 @@ const AppRoutes = () => (
   <Routes>
     <Route element={<MainLayout />}>
       <Route path={ROUTES.PROJECTS} index element={<ProjectsPage />} />
-      {/* <Route path={ROUTES.DASHBOARDS} element={<BoardsPage />} /> */}
+      <Route path={ROUTES.DASHBOARDS} element={<BoardsPage />} />
       <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
     </Route>
     <Route element={<BackgroundLayout />}>

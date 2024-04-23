@@ -3,8 +3,8 @@ import {createStore, merge, sample} from 'effector';
 import {Document, RequestStatus, User} from '@/api/types';
 import {convertFromFields, getRandomEmoji} from '@/utils/helpers';
 
-import {signInFx, signUpFx, updateCredentialsFx} from '../auth/actions';
-import {getUserFx, updateUserEmoji, updateUserFx} from './actions';
+import {changeEmailFx, signInFx, signUpFx, updateCredentialsFx} from '../auth/actions';
+import {getProfileFx, updateUserEmoji, updateUserFx} from './actions';
 import {UserState} from './types';
 
 // Store
@@ -28,10 +28,26 @@ const reducers = {
     status: RequestStatus.Loading,
   }),
 
-  getUserDone: (state: UserState, {fields}: Document) => ({
+  getProfileDone: (state: UserState, {fields}: Document) => ({
     ...state,
     user: convertFromFields<User>(fields),
   }),
+
+  updateUserDone: (state: UserState, newUser: User) => ({
+    ...state,
+    user: newUser,
+  }),
+
+  changeEmailDone: (state: UserState, email: string) => {
+    if (!state.user) return state;
+    return {
+      ...state,
+      user: {
+        ...state.user,
+        email,
+      },
+    };
+  },
 
   updateEmodji: (state: UserState) => ({
     ...state,
@@ -40,27 +56,42 @@ const reducers = {
 };
 
 // Creating combined effects
-const actionsLoad = merge([getUserFx, updateUserFx]);
-const actionsFail = merge([getUserFx.failData, updateUserFx.failData]);
+const actionsLoad = merge([getProfileFx, updateUserFx, changeEmailFx]);
+const actionsFail = merge([getProfileFx.failData, updateUserFx.failData]);
 const authSuccess = merge([signUpFx.done, signInFx.done, updateCredentialsFx.done]);
 
 // Binding of redusers to effects
 $userState.on(actionsFail, reducers.fail);
 $userState.on(actionsLoad, reducers.loading);
 $userState.on(updateUserEmoji, reducers.updateEmodji);
-$userState.on(getUserFx.doneData, reducers.getUserDone);
-
+$userState.on(getProfileFx.doneData, reducers.getProfileDone);
+$userState.on(updateUserFx.doneData, reducers.updateUserDone);
+$userState.on(changeEmailFx.doneData, reducers.changeEmailDone);
 // Samples
 sample({
   clock: authSuccess,
-  target: getUserFx,
+  target: getProfileFx,
 });
 
 sample({
-  clock: getUserFx,
+  clock: getProfileFx,
   target: updateUserEmoji,
 });
 
+sample({
+  clock: changeEmailFx.doneData,
+  source: $userState,
+  fn: (state, email) => {
+    const user = {
+      ...state.user,
+      email,
+    };
+    return user as User;
+  },
+  target: updateUserFx,
+});
+
+// Exports
 export default $userState;
 export * from './actions';
 export * from './types';

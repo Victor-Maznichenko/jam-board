@@ -1,7 +1,7 @@
 import {createEffect} from 'effector';
 
 import {UserRole} from '@/api/constants';
-import {signIn, signUp, updateCredentials} from '@/api/requests/auth';
+import {changeEmail, signIn, signUp, updateCredentials} from '@/api/requests/auth';
 import {FirebaseError, LoginData, RegisterData} from '@/api/types';
 import {saveCredentials} from '@/utils/helpers';
 
@@ -54,5 +54,15 @@ export const updateCredentialsFx = createEffect<void, void, FirebaseError>(async
   });
   location.reload();
 });
+
+export const changeEmailFx = createEffect(async (email: string) => {
+  const {idToken, localId} = await changeEmail(email);
+  saveCredentials({
+    accessToken: idToken,
+    uid: localId,
+  });
+  return email;
+});
+changeEmailFx.failData.watch((error) => console.log(error));
 
 export {baseRequestFailed} from '../firebase';

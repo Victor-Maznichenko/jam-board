@@ -1,0 +1,9 @@
+.addTask {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 0.5rem;
+  :global(.icon-plus) {
+    margin-right: 0.5rem;
+  }
+}

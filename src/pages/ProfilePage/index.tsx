@@ -2,7 +2,10 @@ import {useUnit} from 'effector-react';
 import {ChangeEvent, useEffect, useState} from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import $userState from '@/store/user';
+import {signOut} from '@/api/requests/auth';
+import {RequestStatus} from '@/api/types';
+import {changeEmailFx} from '@/store/auth';
+import $userState, {getUserFx} from '@/store/user';
 
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
@@ -11,11 +14,18 @@ import UserEmoji from '@/components/ui/UserEmoji';
 import styles from './ProfilePage.module.scss';
 
 const ProfilePage = () => {
-  const {user} = useUnit($userState);
+  const [{user, status}] = useUnit([$userState, getUserFx]);
+  const isLoading = status === RequestStatus.Loading;
   const [value, setValue] = useState('');
 
   const handleChange = ({target}: ChangeEvent<HTMLInputElement>) => {
     if (user) setValue(target.value);
+  };
+
+  const changeEmail = () => {
+    if (value) {
+      changeEmailFx(value);
+    }
   };
 
   useEffect(() => {
@@ -35,13 +45,19 @@ const ProfilePage = () => {
             <span>Ваш email:</span>
             <Input
               className={styles.emailInput}
-              value={value}
               placeholder="Введите email"
               onChange={handleChange}
+              value={value}
+              type="email"
+              required
             />
-            <Button>Изменить</Button>
+            <Button onClick={changeEmail} disabled={!isLoading} type="button">
+              Изменить
+            </Button>
           </div>
-          <Button>Выйти из аккаунта</Button>
+          <Button onClick={signOut} type="button">
+            Выйти из аккаунта
+          </Button>
         </div>
       </main>
     </div>

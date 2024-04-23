@@ -2,7 +2,7 @@ import {createEffect} from 'effector';
 import {nanoid} from 'nanoid';
 
 import {Colors} from '@/api/constants';
-import {Project} from '@/api/types';
+import {Project, TaskStatus} from '@/api/types';
 import {convertFromCollection} from '@/utils/helpers';
 
 import {createEntityFx, deleteEntityFx, getEntityFx, updateEntityFx} from '../firebase';
@@ -19,9 +19,7 @@ export const createProjectFx = createEffect(async () => {
     title: 'Название проекта',
     currentColor: Colors.SKY,
   };
-  await createEntityFx({path: `/projects/${id}/boards/planned/tasks`});
-  await createEntityFx({path: `/projects/${id}/boards/inProgress/tasks`});
-  await createEntityFx({path: `/projects/${id}/boards/completed/tasks`});
+  for (let board in TaskStatus) await createEntityFx({path: `/projects/${id}/${board}`});
   await updateEntityFx({path: `/projects/${id}`, body: newProject});
 
   return newProject as Project;

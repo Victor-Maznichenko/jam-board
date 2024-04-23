@@ -1,7 +1,7 @@
-import {TOKENS_NAMES} from '@/api/constants';
+import {API_KEY, TOKENS_NAMES} from '@/api/constants';
 import {LoginData, RegisterData} from '@/api/types';
 import {authFetch, tokenFetch} from '@/api/utils/fetches';
-import {deleteCookie} from '@/utils/helpers';
+import {deleteCookie, getCookie} from '@/utils/helpers';
 
 export const signUp = async (registerData: RegisterData) =>
   await authFetch.post({
@@ -32,5 +32,18 @@ export const updateCredentials = async () =>
     body: {
       grant_type: 'refresh_token',
       refresh_token: localStorage.getItem(TOKENS_NAMES.refresh),
+    },
+  });
+
+export const changeEmail = async (email: string) =>
+  await authFetch.post({
+    path: 'accounts:update',
+    params: {
+      key: API_KEY,
+    },
+    body: {
+      idToken: getCookie(TOKENS_NAMES.access),
+      email,
+      returnSecureToken: true,
     },
   });
