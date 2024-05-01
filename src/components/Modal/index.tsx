@@ -1,4 +1,5 @@
 import {ReactNode} from 'react';
+import ReactDOM from 'react-dom';
 
 import CloseBtn from '@/components/ui/CloseBtn';
 
@@ -10,14 +11,19 @@ interface ModalProps {
   children?: ReactNode;
 }
 
+export const modalElement = document.getElementById('modal');
+
 const Modal = ({children, isModalOpen, closeModal}: ModalProps) => {
-  return (
+  if (!modalElement) return <></>;
+
+  return ReactDOM.createPortal(
     <div className={`${styles.modal} ${!isModalOpen ? 'hide' : ''}`}>
       <div className={styles.inner}>
         {children}
         <CloseBtn className={styles.closeBtn} onClick={() => closeModal()} />
       </div>
-    </div>
+    </div>,
+    modalElement,
   );
 };
 

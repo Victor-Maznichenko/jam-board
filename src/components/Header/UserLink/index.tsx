@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import {Link} from 'react-router-dom';
 
-import $userState from '@/store/user';
+import $userState from '@/store/profile';
 import {ROUTES} from '@/utils/constants';
 
 import styles from './UserLink.module.scss';
@@ -12,7 +12,7 @@ const UserLink = () => {
   const {user, userEmoji} = useUnit($userState);
 
   return (
-    <Link className={styles.userLink} to={ROUTES.PROFILE}>
+    <Link className={styles.userLink} to={ROUTES.Profile}>
       <div className={styles.emoji}>{userEmoji}</div>
       <span className={styles.name}>{user?.displayName ?? <Skeleton />}</span>
     </Link>

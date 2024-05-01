@@ -1,42 +1,37 @@
 import {createEffect} from 'effector';
 
-import {UserRole} from '@/api/constants';
+import {TokensNames, UserRole} from '@/api/constants';
 import {changeEmail, signIn, signUp, updateCredentials} from '@/api/requests/auth';
-import {FirebaseError, LoginData, RegisterData} from '@/api/types';
-import {saveCredentials} from '@/utils/helpers';
+import {deleteCookie, saveCredentials} from '@/api/utils/helpers';
 
-import {createDocByIdFx, updateEntityFx} from '../firebase';
+import {writeEntityFx} from '../firebase';
 
-export const signUpFx = createEffect<RegisterData, void, FirebaseError>(async (registerData) => {
-  // 1. Регистрация в FireAuth
-  const {localId, refreshToken, idToken} = await signUp(registerData);
-  const uid = localId;
-  saveCredentials({
-    accessToken: idToken,
-    refreshToken,
-    uid,
-  });
-
-  // 2. Создание документа в FireStore
-  await createDocByIdFx({
-    path: '/users',
-    id: uid,
-  });
-
-  // 3. Запись данных в документ FireStore
-  await updateEntityFx({
-    path: `/users/${uid}`,
-    body: {
+export const signUpFx = createEffect<Api.RegisterData, void, Api.FirebaseError>(
+  async (registerData) => {
+    // 1. Регистрация в FireAuth
+    const {localId, refreshToken, idToken} = await signUp(registerData);
+    const uid = localId;
+    saveCredentials({
+      accessToken: idToken,
+      refreshToken,
       uid,
-      ...registerData,
-      role: UserRole.VIEWER,
-    },
-  });
+    });
 
-  return uid;
-});
+    // 2. Запись данных в документ FireStore
+    await writeEntityFx({
+      path: `/users/${uid}`,
+      body: {
+        uid,
+        ...registerData,
+        role: UserRole.VIEWER,
+      },
+    });
 
-export const signInFx = createEffect<LoginData, void, FirebaseError>(async (loginData) => {
+    return uid;
+  },
+);
+
+export const signInFx = createEffect<Api.LoginData, void, Api.FirebaseError>(async (loginData) => {
   const {localId, refreshToken, idToken} = await signIn(loginData);
   saveCredentials({
     accessToken: idToken,
@@ -45,7 +40,7 @@ export const signInFx = createEffect<LoginData, void, FirebaseError>(async (logi
   });
 });
 
-export const updateCredentialsFx = createEffect<void, void, FirebaseError>(async () => {
+export const updateCredentialsFx = createEffect<void, void, Api.FirebaseError>(async () => {
   const {refresh_token, access_token, user_id} = await updateCredentials();
   saveCredentials({
     accessToken: access_token,
@@ -63,6 +58,12 @@ export const changeEmailFx = createEffect(async (email: string) => {
   });
   return email;
 });
+
+export const signOutFx = createEffect(() => {
+  localStorage.removeItem(TokensNames.refresh);
+  deleteCookie(TokensNames.access);
+});
+
 changeEmailFx.failData.watch((error) => console.log(error));
 
 export {baseRequestFailed} from '../firebase';

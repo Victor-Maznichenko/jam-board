@@ -1,13 +1,12 @@
-import {getCookie} from '@/utils/helpers';
-
-import {API_KEY, AUTH_URL, BASE_URL, TOKEN_URL, TOKENS_NAMES} from '../constants';
+import {API_KEY, AUTH_URL, BASE_URL, TOKEN_URL, TokensNames} from '../constants';
+import {getCookie} from './helpers';
 import {SimpleFetch} from './SimpleFetch';
 
 export const baseFetch = new SimpleFetch({
   baseURL: BASE_URL,
   options: {
     headers: {
-      Authorization: `Bearer ${getCookie(TOKENS_NAMES.access)}`,
+      Authorization: `Bearer ${getCookie(TokensNames.access)}`,
     },
   },
 });

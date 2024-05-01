@@ -1,0 +1,24 @@
+.tools {
+  position: absolute;
+  pointer-events: none;
+  transition: all 0.25s;
+  opacity: 0;
+  right: 0.75rem;
+  top: 0.75rem;
+  z-index: 1;
+  display: flex;
+  column-gap: 0.5rem;
+  align-items: center;
+
+  button {
+    padding: 0.25rem;
+    border-radius: 0.375rem;
+    font-size: 0;
+  }
+}
+.btnRemove {
+  background-color: tomato;
+}
+.btnChange {
+  background-color: rgb(55 65 81);
+}

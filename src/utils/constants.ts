@@ -1,7 +1,15 @@
+import {TaskStatus} from '@/api/constants';
+
 export enum ROUTES {
-  DASHBOARDS = '/:projectID',
-  PROJECTS = '/',
-  AUTH = '/auth',
-  NOT_FOUND = '*',
-  PROFILE = '/profile',
+  Tasks = '/:projectID',
+  Projects = '/',
+  Auth = '/auth',
+  NotFound = '*',
+  Profile = '/profile',
 }
+
+export const BoardTitles = {
+  [TaskStatus.Planned]: '📅 Запланированно',
+  [TaskStatus.Progress]: '💼 В процессе',
+  [TaskStatus.Completed]: '✅ Выполнено',
+};

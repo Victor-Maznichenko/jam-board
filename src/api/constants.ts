@@ -6,15 +6,23 @@ export const STORAGE_BUCKET = import.meta.env.VITE_FIREBASE_STOGRAGE_BUCKET;
 export const MESSAGING_SENDER_ID = import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID;
 export const APP_ID = import.meta.env.VITE_FIREBASE_APP_ID;
 
-// Api URLS
+// API URLS
 export const AUTH_URL: string = import.meta.env.VITE_FIREBASE_AUTH_URL;
 export const BASE_URL: string = import.meta.env.VITE_FIREBASE_BASE_URL;
 export const TOKEN_URL: string = import.meta.env.VITE_FIREBASE_TOKEN_URL;
 
-export const TOKENS_NAMES = {
-  refresh: 'refreshToken',
-  access: 'accessToken',
-};
+// Константы объявленны здесь а не в types.d.ts, т.к. .d.ts не будет создавать объекты enum во время выполнения
+export enum TokensNames {
+  refresh = 'refreshToken',
+  access = 'accessToken',
+}
+
+export enum RequestStatus {
+  Pending = 'pending',
+  Loading = 'loading',
+  Success = 'success',
+  Fail = 'fail',
+}
 
 export enum UserRole {
   VIEWER = 'Пользователь без прав',
@@ -22,8 +30,6 @@ export enum UserRole {
   TEAM_LEAD = 'Тимлид',
   ADMIN = 'Админ',
 }
-
-export const PermittedUserRoles = [UserRole.TEAM_LEAD, UserRole.ADMIN];
 
 export enum AuthError {
   EMAIL_EXISTS = 'EMAIL_EXISTS',
@@ -33,7 +39,21 @@ export enum AuthError {
   TOO_MANY_ATTEMPTS_TRY_LATER = 'TOO_MANY_ATTEMPTS_TRY_LATER',
 }
 
-export enum Colors {
+export enum FetchMethod {
+  Get = 'GET',
+  Put = 'PUT',
+  Post = 'POST',
+  Patch = 'PATCH',
+  Delete = 'DELETE',
+}
+
+export enum TaskStatus {
+  Planned = 'planned',
+  Progress = 'progress',
+  Completed = 'completed',
+}
+
+export enum ProjectColors {
   SKY = '#0369a1',
   RED = '#b91c1c',
   BLUE = '#1d4ed8',
@@ -51,3 +71,5 @@ export enum Colors {
   SLATE_700 = '#334155',
   SLATE_900 = '#0f172a',
 }
+
+export const PermittedUserRoles = [UserRole.TEAM_LEAD, UserRole.ADMIN];

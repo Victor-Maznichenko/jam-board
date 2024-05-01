@@ -1,7 +1,7 @@
 import {ReactNode, useEffect} from 'react';
 
-import useLocalStorage from '@/hooks/useLocalStorage';
 import {setBodyTheme} from '@/utils/helpers';
+import useLocalStorage from '@/utils/hooks/useLocalStorage';
 
 import {ThemeContext} from './context';
 

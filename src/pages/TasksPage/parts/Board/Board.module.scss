@@ -1,0 +1,28 @@
+.board {
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 0.5rem;
+}
+
+.inner {
+  background-color: var(--background-content);
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 200px;
+}
+
+.top {
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  min-height: 40px;
+  overflow: hidden;
+  background-color: var(--background-secondary);
+  border-bottom: 1px solid var(--background);
+}
+
+.content {
+  padding: 1.5rem;
+}

@@ -9,7 +9,7 @@ import styles from './NotFoundPage.module.scss';
 const NotFoundPage = () => {
   const navigate = useNavigate();
   const handleBackward = () => navigate(-1);
-  const handleHome = () => navigate(ROUTES.DASHBOARDS);
+  const handleHome = () => navigate(ROUTES.Projects);
 
   return (
     <main className={styles.notFound}>

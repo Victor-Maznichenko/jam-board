@@ -1,0 +1,15 @@
+.boards {
+  padding: 50px 0;
+}
+
+.top {
+  margin-bottom: 6rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 2rem;
+}

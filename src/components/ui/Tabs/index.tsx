@@ -1,17 +1,7 @@
 import {useState} from 'react';
 
 import styles from './Tabs.module.scss';
-
-interface TabData {
-  title: string;
-  content: JSX.Element;
-}
-
-interface TabsProps {
-  tabsData: Array<TabData>;
-  className?: string;
-  onTabChange?: () => void;
-}
+import {TabsProps} from './types';
 
 const Tabs = ({tabsData, className = '', onTabChange}: TabsProps) => {
   const [selectedTab, setSelectedTab] = useState(0);

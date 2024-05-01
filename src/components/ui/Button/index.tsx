@@ -8,12 +8,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({className = '', children, type = 'button', ...props}, ref) => {
     return (
       <button
-        id="button"
         className={`${className} ${styles.button}`}
         type={type}
-        style={{}}
-        {...props}
+        // style={{}}
         ref={ref}
+        {...props}
       >
         {children}
       </button>

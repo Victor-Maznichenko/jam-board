@@ -1,8 +1,5 @@
-import {UnknownObject} from '@/types';
-
-import {buildUrl} from '@/utils/helpers';
-
-import {FetchMethod, FirebaseError, RequestParams, SimpleFetchParams} from '../types';
+import {FetchMethod} from '../constants';
+import {buildUrl} from './helpers';
 
 export class SimpleFetch {
   public baseURL?: string;
@@ -10,7 +7,7 @@ export class SimpleFetch {
   public defaultParams?: UnknownObject;
   private controller: AbortController;
 
-  constructor({baseURL, params, options}: SimpleFetchParams) {
+  constructor({baseURL, params, options}: Api.SimpleFetchParams) {
     this.baseURL = baseURL;
     this.defaultParams = params;
     this.controller = new AbortController();
@@ -21,14 +18,14 @@ export class SimpleFetch {
     };
   }
 
-  async get({path}: Pick<RequestParams, 'path'>) {
+  async get({path}: Pick<Api.RequestParams, 'path'>) {
     return await this.request({
       method: FetchMethod.Get,
       path,
     });
   }
 
-  async put({path, params, body}: Omit<RequestParams, 'baseURL' | 'method'>) {
+  async put({path, params, body}: Omit<Api.RequestParams, 'baseURL' | 'method'>) {
     return await this.request({
       method: FetchMethod.Put,
       path,
@@ -37,7 +34,7 @@ export class SimpleFetch {
     });
   }
 
-  async post({path, params, body}: Omit<RequestParams, 'baseURL' | 'method'>) {
+  async post({path, params, body}: Omit<Api.RequestParams, 'baseURL' | 'method'>) {
     return await this.request({
       method: FetchMethod.Post,
       path,
@@ -46,7 +43,7 @@ export class SimpleFetch {
     });
   }
 
-  async patch({path, params, body}: Omit<RequestParams, 'baseURL' | 'method'>) {
+  async patch({path, params, body}: Omit<Api.RequestParams, 'baseURL' | 'method'>) {
     return await this.request({
       method: FetchMethod.Patch,
       path,
@@ -54,7 +51,7 @@ export class SimpleFetch {
       body,
     });
   }
-  async delete({path}: Pick<RequestParams, 'path'>) {
+  async delete({path}: Pick<Api.RequestParams, 'path'>) {
     return await this.request({
       method: FetchMethod.Delete,
       path,
@@ -65,7 +62,7 @@ export class SimpleFetch {
     this.controller.abort();
   }
 
-  private async request({method, path, params, body = null}: RequestParams) {
+  private async request({method, path, params, body = null}: Api.RequestParams) {
     const buildUrlConfig = {
       baseURL: this.baseURL,
       path,
@@ -80,7 +77,7 @@ export class SimpleFetch {
 
     if (!response.ok) {
       const {error} = await response.json();
-      throw error as FirebaseError;
+      throw error as Api.FirebaseError;
     }
 
     return await response.json();

@@ -5,7 +5,7 @@ import {ROUTES} from '@/utils/constants';
 import styles from './Logo.module.scss';
 
 const Logo = () => (
-  <Link className={styles.logo} to={ROUTES.PROJECTS}>
+  <Link className={styles.logo} to={ROUTES.Projects}>
     <span className={styles.emoji}>🎯</span>
     <span className={styles.text}>JamBoard</span>
   </Link>

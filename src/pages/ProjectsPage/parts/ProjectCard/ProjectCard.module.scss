@@ -1,0 +1,29 @@
+@import '@/assets/styles/mixins';
+
+.card {
+  width: 25rem;
+  height: 13rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  color: white;
+  border: 1px solid var(--base-text-color);
+  &:hover .tools {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  @include flex-center();
+}
+
+.title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  display: inline-block;
+}

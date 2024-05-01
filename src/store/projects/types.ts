@@ -1,11 +1,11 @@
-import {Project, RequestStatus} from '@/api/types';
+import {RequestStatus} from '@/api/constants';
 
 export interface ProjectState {
-  list: Project[];
+  list: Api.Project[];
   status: RequestStatus;
 }
 
 export interface UpdateProjectParams {
   projectId: string;
-  body: Partial<Project>;
+  body: Partial<Api.Project>;
 }

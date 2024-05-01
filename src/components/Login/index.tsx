@@ -1,10 +1,10 @@
 import {useUnit} from 'effector-react';
-import {ChangeEvent, FormEvent, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-import {RequestStatus} from '@/api/types';
+import {RequestStatus} from '@/api/constants';
 import $authState, {signInFx} from '@/store/auth';
 import {ROUTES} from '@/utils/constants';
+import {useInputs} from '@/utils/hooks/useInputs';
 
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
@@ -15,20 +15,15 @@ const Login = ({className = ''}) => {
   const navigate = useNavigate();
   const {errorMessage, status} = useUnit($authState);
   const isLoading = status === RequestStatus.Loading;
-
-  const [values, setValues] = useState({
+  const {values, handleChange} = useInputs<Api.LoginData>({
     email: '',
     password: '',
   });
 
-  const handleChange = ({target: {value, name}}: ChangeEvent<HTMLInputElement>) => {
-    setValues({...values, [name]: value});
-  };
-
-  const handleSubmit = async (event: FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     await signInFx(values);
-    navigate(ROUTES.PROJECTS);
+    navigate(ROUTES.Projects);
   };
 
   return (

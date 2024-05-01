@@ -1,10 +1,9 @@
 import Icon from '@/components/ui/Icon';
 
 import styles from './CloseBtn.module.scss';
+import {CloseBtnProps} from './types';
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
-
-const CloseBtn = ({className = '', width = 20, height = 20, ...props}) => {
+const CloseBtn = ({className = '', width = 20, height = 20, ...props}: CloseBtnProps) => {
   return (
     <button className={`${className} ${styles.closeBtn}`} type="button" {...props}>
       <Icon name="close" width={width} height={height} />

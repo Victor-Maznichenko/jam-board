@@ -1,6 +1,7 @@
-import {RequestStatus} from '@/api/types';
+import {RequestStatus} from '@/api/constants';
 
 export interface AuthState {
+  isRedirect: boolean;
   errorMessage: string | null;
   status: RequestStatus;
 }

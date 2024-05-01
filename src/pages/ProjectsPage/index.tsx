@@ -1,4 +1,4 @@
-import ProjectsList from './ProjectsList';
+import ProjectsList from './parts/ProjectsList';
 import styles from './ProjectsPage.module.scss';
 
 const ProjectsPage = () => (

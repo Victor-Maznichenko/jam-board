@@ -1,7 +1,7 @@
 import {createStore, merge} from 'effector';
 
-import {Project, RequestStatus} from '@/api/types';
-import {updateItemInArray} from '@/utils/helpers';
+import {RequestStatus} from '@/api/constants';
+import {updateItemInArray} from '@/api/utils/helpers';
 
 import {createProjectFx, deleteProjectFx, getProjectsFx, updateProjectFx} from './actions';
 import {ProjectState} from './types';
@@ -13,6 +13,7 @@ const initialState: ProjectState = {
 };
 
 const $projectsState = createStore<ProjectState>(initialState);
+export const $projectsList = $projectsState.map((state) => state.list);
 
 // Reducers
 const reducers = {
@@ -26,13 +27,13 @@ const reducers = {
     status: RequestStatus.Loading,
   }),
 
-  getProjectsDone: (state: ProjectState, list: Project[]) => ({
+  getProjectsDone: (state: ProjectState, list: Api.Project[]) => ({
     ...state,
     list,
     status: RequestStatus.Success,
   }),
 
-  createProjectDone: (state: ProjectState, newProject: Project) => ({
+  createProjectDone: (state: ProjectState, newProject: Api.Project) => ({
     ...state,
     list: [...state.list, newProject],
     status: RequestStatus.Success,
@@ -47,7 +48,7 @@ const reducers = {
     };
   },
 
-  updateProjectDone: (state: ProjectState, newProject: Project) => ({
+  updateProjectDone: (state: ProjectState, newProject: Api.Project) => ({
     ...state,
     list: updateItemInArray(newProject, state.list),
     status: RequestStatus.Success,
@@ -56,7 +57,11 @@ const reducers = {
 
 // Creating combined effects
 const actionsLoad = merge([getProjectsFx, createProjectFx, createProjectFx]);
-const actionsFail = merge([getProjectsFx.failData, createProjectFx.failData, createProjectFx.failData]);
+const actionsFail = merge([
+  getProjectsFx.failData,
+  createProjectFx.failData,
+  createProjectFx.failData,
+]);
 
 // Binding of redusers to effects
 $projectsState.on(actionsFail, reducers.fail);
